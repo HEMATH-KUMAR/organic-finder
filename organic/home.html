@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initail-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Organic Finder Page</title>
+</head>
+<body>
+    <section class="showcase">
+        <header>
+            <h2 class="logo">Organic finder</h2>
+            <div class="toggle"></div>
+        </header>
+        <video src="vegetable.mp4" muted loop autoplay></video>
+        <div class="overlay"></div>
+        <div class="text">
+            <h2>Welome to our website</h2>
+            <h3>Feed the soil, not your plants</h3>
+            <a href="#">Explore</a>
+        </div>
+        <ul class="Social">
+            <li><a href="#"><img src="facebook.png" alt="" width="50" height="50"></a></li>
+            <li><a href="#"><img src="instagram.png" alt="" width="50" height="50"></a></li>
+            <li><a href="#"><img src="twitter.png" alt="" width="50" height="50"></a></li>
+        </ul>
+    </section>
+    <div class="menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="explor web.html">Vendar Dashboard</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Terms and condition</a></li>
+        </ul>
+    </div>
+    <script>
+        const menuToggle = document.querySelector('.toggle')
+        const showcase = document.querySelector('.showcase')
+        menuToggle.addEventListener('click',()=>{
+            menuToggle.classList.toggle('active')
+            showcase.classList.toggle('active')
+        })
+    </script>
+</body>
+</html>

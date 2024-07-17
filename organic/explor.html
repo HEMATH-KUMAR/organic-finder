@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nearby Places Search</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <input id="searchInput" type="text" placeholder="Enter a location">
+    <button onclick="searchNearby()">Search</button>
+    <div id="map"></div>
+
+    <script>
+        var map;
+        var service;
+
+        function initMap() {
+            var center = { lat: 40.7128, lng: -74.0060 }; // Default center (New York City)
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: center,
+                zoom: 14 // Adjust zoom level as needed
+            });
+        }
+
+        function searchNearby() {
+            var searchInput = document.getElementById('searchInput').value;
+            var request = {
+                location: map.getCenter(),
+                radius: '500', // Adjust radius as needed (in meters)
+                query: searchInput
+            };
+
+            service = new google.maps.places.PlacesService(map);
+            service.textSearch(request, callback);
+        }
+
+        function callback(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                    'Address: ' + place.formatted_address + '<br>' +
+                    'Rating: ' + (place.rating || "N/A") + '</div>');
+                infowindow.open(map, this);
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF6n3FRfg44nxX1OwxKbQ92IvkCteaydM&libraries=places&callback=initMap"></script>
+    <!-- Replace YOUR_API_KEY with your actual Google Maps API key -->
+</body>
+</html>
